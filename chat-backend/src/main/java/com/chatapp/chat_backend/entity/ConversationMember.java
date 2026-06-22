@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +18,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "conversation_members")
+@Table(
+    name = "conversation_members",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"conversation_id", "user_id"})
+    }
+)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -36,6 +42,8 @@ public class ConversationMember {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    private String role; // ADMIN / MEMBER
 
     private LocalDateTime joinedAt;
 

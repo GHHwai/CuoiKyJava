@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Trò chuyện</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- WebSocket -->
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+
+    <style>
+        body {
+            background: #f0f2f5;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-item {
+            padding: 12px;
+            margin: 4px 8px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .chat-item:hover {
+            background: #f1f1f1;
+        }
+
+        /* CHAT */
+        .chat-box {
+            height: 80vh;
+            overflow-y: auto;
+            background: #f5f6f7;
+            padding: 10px;
+        }
+
+        .msg {
+            padding: 8px 12px;
+            margin: 5px;
+            border-radius: 15px;
+            max-width: 60%;
+            word-wrap: break-word;
+        }
+
+        .me {
+            background: #0d6efd;
+            color: white;
+            margin-left: auto;
+        }
+
+        .you {
+            background: #e4e6eb;
+        }
+
+        /* INPUT */
+        .chat-input {
+            background: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- ================= SIDEBAR ================= -->
+        <div class="col-3 sidebar p-0">
+
+            <!-- HEADER -->
+            <div class="p-3 fw-bold border-bottom">
+                💬 Trò chuyện
+            </div>
+
+            <!-- LIST CHAT -->
+            <div id="conversationList" class="flex-grow-1 overflow-auto"></div>
+
+            <!-- BUTTON THÊM BẠN -->
+            <div class="p-3 border-top">
+
+                <button class="btn btn-outline-primary w-100"
+                        onclick="openAddFriendModal()">
+                    ➕ Thêm bạn bè
+                </button>
+
+            </div>
+        </div>
+
+        <!-- ================= CHAT AREA ================= -->
+        <div class="col-9 d-flex flex-column">
+
+            <!-- HEADER -->
+            <div class="p-3 border-bottom bg-white fw-bold" id="chatName">
+                Chọn cuộc trò chuyện
+            </div>
+
+            <!-- MESSAGES -->
+            <div id="messages" class="chat-box flex-grow-1"></div>
+
+            <!-- INPUT -->
+            <div class="p-3 border-top chat-input d-flex">
+
+                <input id="msg"
+                       class="form-control me-2 rounded-pill"
+                       placeholder="Nhập tin nhắn...">
+
+                <button class="btn btn-primary rounded-pill"
+                        onclick="sendMessage()">
+                    Gửi
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- ================= MODAL THÊM BẠN ================= -->
+<div class="modal fade" id="addFriendModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5>➕ Thêm bạn bè</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- SEARCH -->
+                <input id="searchUser"
+                       class="form-control mb-3"
+                       placeholder="Tìm theo tên hoặc email..."
+                       oninput="filterUsers()">
+
+                <!-- USER LIST -->
+                <div id="userList"></div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="chat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

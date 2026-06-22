@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    font-family: Arial;
+}
+
+.app {
+    display: flex;
+    height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 30%;
+    background: #f0f2f5;
+    border-right: 1px solid #ddd;
+}
+
+.sidebar-header {
+    padding: 15px;
+    font-weight: bold;
+}
+
+.chat-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.chat-item:hover {
+    background: #e4e6eb;
+}
+
+/* CHAT */
+.chat {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background: #e5ddd5;
+}
+
+/* MESSAGE BUBBLE */
+.msg {
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 10px;
+    max-width: 60%;
+}
+
+.me {
+    background: #0084ff;
+    color: white;
+    margin-left: auto;
+}
+
+.you {
+    background: white;
+}
+
+/* INPUT */
+.chat-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+}
